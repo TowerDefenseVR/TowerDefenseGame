@@ -235,6 +235,11 @@ MonoBehaviour:
   height: 4
   width: 4
   spaceBetween: 1
+  pathMaterial: {fileID: 2100000, guid: 441bd42ece2e023458c1166a6d21c678, type: 2}
+  groundMaterial: {fileID: 2100000, guid: 859dbfabc75e356478cf95ef704f7c55, type: 2}
+  startMaterial: {fileID: 2100000, guid: b5897218e2e2607479c86fa0553a6155, type: 2}
+  endMaterial: {fileID: 2100000, guid: 16f19f6fad918f14f942a889a712ecca, type: 2}
+  unknownMaterial: {fileID: 2100000, guid: 727c0ed2b36cae241835de87bd5ba0a8, type: 2}
 --- !u!4 &62803073
 Transform:
   m_ObjectHideFlags: 0
@@ -1147,7 +1152,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1521959789}
   m_LocalRotation: {x: 0.41382343, y: 0.571122, z: -0.406376, w: 0.5808859}
-  m_LocalPosition: {x: -30.7, y: 122.12, z: -1.8}
+  m_LocalPosition: {x: -28.54, y: 159.85, z: 41.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

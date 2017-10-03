@@ -7,17 +7,29 @@ public class CreateGrid : MonoBehaviour {
 	public int height;
 	public int width;
 	public int spaceBetween;
+	public Material pathMaterial;
+	public Material groundMaterial;
+	public Material startMaterial;
+	public Material endMaterial;
+	public Material unknownMaterial;
+	private GameObject game;
+	private GameObject pathTiles;
+	private GameObject groundTiles;
+	private GameObject unknownTiles;
 
 	// Use this for initialization
 	void Start () {
-		createMap();
-		createMapFromImg("C:/Users/wizard man/Documents/GitHub/TowerDefenseVR/Assets/maps/map_test.png");		
+		//createMap();
+		game = new GameObject("Game");
+		pathTiles = new GameObject("Path Tiles");
+		groundTiles = new GameObject("Ground Tiles");
+		unknownTiles = new GameObject("Unknown Tiles");
+		createMapFromImg(Directory.GetCurrentDirectory() + "/Assets/maps/map_test3.png");	
 	}
 
 	public static Texture2D LoadPNG(string filePath) {
 		Texture2D tex = null;
 		byte[] fileData;
-
 		if (File.Exists(filePath))     {
 			print("loaded image");
 			fileData = File.ReadAllBytes(filePath);
@@ -41,18 +53,46 @@ public class CreateGrid : MonoBehaviour {
 
 	void createMapFromImg(string path) {
 		Texture2D tex = LoadPNG(path);
-		Color pixel_colour = tex.GetPixel(4,1);
-		if(pixel_colour == Color.black) {
-			print(pixel_colour + " => path");
-		} else if(pixel_colour == Color.green) {
-			print(pixel_colour + " => ground");
-		} else if(pixel_colour == Color.blue) {
-			print(pixel_colour + " => start");
-		} else if(pixel_colour == Color.red) {
-			print(pixel_colour + " => end");
-		} else {
-			print(pixel_colour + " => unknown");
-		}
+		Color pixel_colour = Color.clear;
+		for(int i = 0; i < tex.width; i++) {
+			for(int j = 0; j < tex.height; j++) {
+				pixel_colour = tex.GetPixel(i,j);
+				if(pixel_colour == Color.black) {
+					GameObject tile = GameObject.CreatePrimitive(PrimitiveType.Plane);
+					tile.transform.parent = pathTiles.transform;
+					pathTiles.transform.parent = game.transform;
+					tile.name = "Path_" + i + ":" + j;
+					tile.transform.position = new Vector3(i*(10+spaceBetween), 0, j*(10+spaceBetween));
+					tile.GetComponent<MeshRenderer>().material = pathMaterial;
+				} else if(pixel_colour == Color.green) {
+					GameObject tile = GameObject.CreatePrimitive(PrimitiveType.Plane);
+					tile.transform.parent = groundTiles.transform;
+					groundTiles.transform.parent = game.transform;
+					tile.name = "Ground_" + i + ":" + j;
+					tile.transform.position = new Vector3(i*(10+spaceBetween), 0, j*(10+spaceBetween));
+					tile.GetComponent<MeshRenderer>().material = groundMaterial;
+				} else if(pixel_colour == Color.blue) {
+					GameObject tile = GameObject.CreatePrimitive(PrimitiveType.Plane);
+					tile.transform.parent = game.transform;
+					tile.name = "Start_" + i + ":" + j;
+					tile.transform.position = new Vector3(i*(10+spaceBetween), 0, j*(10+spaceBetween));
+					tile.GetComponent<MeshRenderer>().material = startMaterial;
+				} else if(pixel_colour == Color.red) {
+					GameObject tile = GameObject.CreatePrimitive(PrimitiveType.Plane);
+					tile.transform.parent = game.transform;
+					tile.name = "End_" + i + ":" + j;
+					tile.transform.position = new Vector3(i*(10+spaceBetween), 0, j*(10+spaceBetween));
+					tile.GetComponent<MeshRenderer>().material = endMaterial;
+				} else {
+					GameObject tile = GameObject.CreatePrimitive(PrimitiveType.Plane);
+					tile.transform.parent = unknownTiles.transform;
+					unknownTiles.transform.parent = game.transform;
+					tile.name = "Unknown_" + i + ":" + j;
+					tile.transform.position = new Vector3(i*(10+spaceBetween), 0, j*(10+spaceBetween));
+					tile.GetComponent<MeshRenderer>().material = unknownMaterial;
+				}
+			}
+		}	
 	}
 	
 	// Update is called once per frame
