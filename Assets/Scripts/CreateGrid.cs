@@ -31,7 +31,7 @@ public class CreateGrid : MonoBehaviour {
 		Texture2D tex = null;
 		byte[] fileData;
 		if (File.Exists(filePath))     {
-			print("loaded image");
+		//	print("loaded image");
 			fileData = File.ReadAllBytes(filePath);
 			tex = new Texture2D(1,1);
 			tex.LoadImage(fileData);
