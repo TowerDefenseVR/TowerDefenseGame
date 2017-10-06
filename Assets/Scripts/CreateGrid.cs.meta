@@ -1,10 +1,15 @@
 fileFormatVersion: 2
 guid: 05e3b292abe9ccb4d815cd595e376a51
-timeCreated: 1506952667
+timeCreated: 1507293389
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - pathMaterial: {fileID: 2100000, guid: 441bd42ece2e023458c1166a6d21c678, type: 2}
+  - groundMaterial: {fileID: 2100000, guid: 859dbfabc75e356478cf95ef704f7c55, type: 2}
+  - startMaterial: {fileID: 2100000, guid: b5897218e2e2607479c86fa0553a6155, type: 2}
+  - endMaterial: {fileID: 2100000, guid: 16f19f6fad918f14f942a889a712ecca, type: 2}
+  - unknownMaterial: {fileID: 2100000, guid: 05cb9634871418a46967c24ac70fa48a, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
