@@ -8,12 +8,20 @@ public class EnemySpawner : MonoBehaviour {
 	public Transform spawnPoint;
 	public float spawnInterval = 5f;
 	
-	void Start () {
-		InvokeRepeating("SpawnEnemy", 0, spawnInterval);
-	}
+	public int waveLimit = 10;
+	private int enemyCount = 0;
 	
-	// Update is called once per frame
+	void Start () {
+		InvokeRepeating("SpawnEnemy", 0.2f, spawnInterval);
+	}
+
 	void SpawnEnemy() {
-		Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation, GameObject.Find("Enemies").transform);
+		if(enemyCount >= waveLimit) {
+			print("-- WAVE FINISHED --");
+			CancelInvoke("SpawnEnemy");
+		} else {
+			Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation, GameObject.Find("Enemies").transform);
+			enemyCount++;
+		}
 	}
 }

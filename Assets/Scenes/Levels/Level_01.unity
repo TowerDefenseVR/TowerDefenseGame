@@ -668,7 +668,8 @@ MonoBehaviour:
   enemyPrefab: {fileID: 4024804838865750, guid: 8a05d1e478b7f8b4ba15def3d021d311,
     type: 2}
   spawnPoint: {fileID: 2120686270}
-  spawnInterval: 2
+  spawnInterval: 1
+  waveLimit: 15
 --- !u!4 &423687085
 Transform:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour {
-	public float moveSpeed = 7f;
+	public float moveSpeed = 10f;
 	public float turnSpeed = 10f;
 	private Transform target;
 	private int wpIndex = 0;
