@@ -30,7 +30,6 @@ public class EnemyMovement : MonoBehaviour {
 		} else {
 			wpIndex++;
 			target = Waypoints.waypoints[wpIndex];
-			print("switch wp: " + wpIndex);
 		}
 	}
 }
