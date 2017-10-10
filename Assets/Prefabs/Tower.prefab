@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 136855622007495158}
   - component: {fileID: 23666095468600160}
   m_Layer: 2
-  m_Name: Cylinder
+  m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,7 +86,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1817271958913382}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 60.120834, y: 4.499542, z: 82.868866}
+  m_LocalPosition: {x: 58.479546, y: 4.499542, z: 83.27076}
   m_LocalScale: {x: 2, y: 4, z: 2}
   m_Children:
   - {fileID: 4363928447700440}
@@ -249,8 +249,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 4506384446055120, guid: 4a7513a316c294144875c4a5b9a08acb,
     type: 2}
-  fireRate: 5
-  range: 15
+  fireRate: 2
+  fireRange: 10
+  rotSpeed: 5
 --- !u!135 &135601164460813868
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -258,7 +259,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1376755148883972}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5

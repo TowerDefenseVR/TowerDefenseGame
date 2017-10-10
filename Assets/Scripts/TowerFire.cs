@@ -5,7 +5,8 @@ using UnityEngine;
 public class TowerFire : MonoBehaviour {
 	public Transform bulletPrefab;
 	public float fireRate;
-	public float range;
+	public float fireRange;
+	public float rotSpeed;
 	private Transform target;
 
 	// Use this for initialization
@@ -17,20 +18,18 @@ public class TowerFire : MonoBehaviour {
 		target = FindNearestEnemy();
 		if(target != null) {
 			RotateTowardEnemy();
-			if(Vector3.Distance(transform.position, target.position) <= range && !IsInvoking("Fire")) {
-				print("FIRE!");
+			if(Vector3.Distance(transform.position, target.position) <= fireRange && !IsInvoking("Fire")) {
 				InvokeRepeating("Fire", 0.0f, 1/fireRate);
-			} else if(Vector3.Distance(transform.position, target.position) > range && IsInvoking("Fire")) {
-				print("HALT FIRE!");
+			} else if(Vector3.Distance(transform.position, target.position) > fireRange && IsInvoking("Fire")) {
 				CancelInvoke("Fire");
 			}
 		}
 	}
 
 	void RotateTowardEnemy() {
+		//Transform barrel = transform.Find("Barrel");
 		Vector3 targetDir = target.position - transform.position;
-        float step = 10 * Time.deltaTime;
-        Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
+		Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, rotSpeed * Time.deltaTime, 0.0F);
         transform.rotation = Quaternion.LookRotation(newDir);
 		transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
 	}
@@ -52,7 +51,13 @@ public class TowerFire : MonoBehaviour {
 	}
 
 	void Fire() {
-		bulletPrefab = Instantiate(bulletPrefab, transform.position, transform.rotation);
-		bulletPrefab.GetComponent<Rigidbody>().velocity = transform.TransformDirection(new Vector3(0, 0, 50));
+		Transform bulletClone = Instantiate(bulletPrefab, transform.Find("Barrel").position, transform.Find("Barrel").rotation);
+		Bullet b = bulletClone.GetComponent<Bullet>();
+		if(b != null) {
+			b.SetTarget(target);
+		}
+		//bulletClone.GetComponent<Rigidbody>().velocity = transform.TransformDirection(new Vector3(0, 0, 20));
+		//bulletPrefab.Translate(Vector3.forward * Time.deltaTime, Space.World);
+		//bulletClone.position = Vector3.MoveTowards(transform.position, target.position, .003f);
 	}
 }

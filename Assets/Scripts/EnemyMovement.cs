@@ -5,6 +5,9 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour {
 	public float moveSpeed = 10f;
 	public float turnSpeed = 10f;
+
+	//move this to enemy stats script?
+	private float health = 15.0f;
 	private Transform target;
 	private int wpIndex = 0;
 
@@ -15,9 +18,8 @@ public class EnemyMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Vector3 mDir = target.position - transform.position;
 		Quaternion rDir = Quaternion.LookRotation(target.position - transform.position);
-		transform.Translate(mDir.normalized * moveSpeed * Time.deltaTime, Space.World);
+		transform.position = Vector3.MoveTowards(transform.position, target.position,  Time.deltaTime * moveSpeed);
 		transform.rotation = Quaternion.Slerp(transform.rotation, rDir, Time.deltaTime * turnSpeed);
 		if(Vector3.Distance(transform.position, target.position) <= 0.2f) {
 			NextWaypoint();
@@ -32,4 +34,14 @@ public class EnemyMovement : MonoBehaviour {
 			target = Waypoints.waypoints[wpIndex];
 		}
 	}
+
+	void OnCollisionEnter(Collision collision) {
+		//subtract from hp to enemies
+		if(collision.gameObject.tag == "Bullet") {
+			health--;
+			if(health <= 0) {
+				Destroy(gameObject);
+			}
+		}
+    }
 }

@@ -196,7 +196,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4645621863349934, guid: 18e78c249bcbbc348af486c765433c66, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 18e78c249bcbbc348af486c765433c66, type: 2}
@@ -264,7 +264,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 71.191, y: 174.348, z: 181.06}
 --- !u!1001 &1059413348
 Prefab:
@@ -348,7 +348,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 4024804838865750, guid: 8a05d1e478b7f8b4ba15def3d021d311,
     type: 2}
   spawnPoint: {fileID: 1891716766}
-  spawnInterval: 10
+  spawnInterval: 5
   waveLimit: 0
 --- !u!4 &1184657641
 Transform:
