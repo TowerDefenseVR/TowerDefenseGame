@@ -18,9 +18,16 @@ public class EnemyMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Quaternion rDir = Quaternion.LookRotation(target.position - transform.position);
-		transform.position = Vector3.MoveTowards(transform.position, target.position,  Time.deltaTime * moveSpeed);
-		transform.rotation = Quaternion.Slerp(transform.rotation, rDir, Time.deltaTime * turnSpeed);
+		if(health <= 0) {
+			Destroy(gameObject);
+		}
+		
+		if(target.position != transform.position) {
+			Quaternion rDir = Quaternion.LookRotation(target.position - transform.position);
+			transform.position = Vector3.MoveTowards(transform.position, target.position,  Time.deltaTime * moveSpeed);
+			transform.rotation = Quaternion.Slerp(transform.rotation, rDir, Time.deltaTime * turnSpeed);
+		}
+		
 		if(Vector3.Distance(transform.position, target.position) <= 0.2f) {
 			NextWaypoint();
 		}
@@ -36,12 +43,8 @@ public class EnemyMovement : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision) {
-		//subtract from hp to enemies
 		if(collision.gameObject.tag == "Bullet") {
-			health--;
-			if(health <= 0) {
-				Destroy(gameObject);
-			}
+			health -= collision.gameObject.GetComponent<Bullet>().damage;
 		}
     }
 }

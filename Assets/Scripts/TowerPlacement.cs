@@ -9,7 +9,7 @@ public class TowerPlacement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		towerPrefab = Instantiate(towerPrefab, towerPrefab.position, towerPrefab.rotation, GameObject.Find("Towers").transform);
+		towerPrefab = Instantiate(towerPrefab, towerPrefab.position, towerPrefab.rotation, transform);
 	}
 	
 	// Update is called once per frame
@@ -18,9 +18,10 @@ public class TowerPlacement : MonoBehaviour {
 		RaycastHit hit;
 		// Casts the ray and get the first game object hit
 		Physics.Raycast(ray, out hit);
+		
 		towerPrefab.position = new Vector3(hit.point.x, (hit.point.y+towerPrefab.lossyScale.y/2), hit.point.z);
 		if(Input.GetButtonDown("Fire1") && Physics.OverlapSphere(towerPrefab.position, radiusBetween, 1 << LayerMask.NameToLayer("Ignore Raycast")).Length <= 1){
-			Instantiate(towerPrefab, towerPrefab.position, towerPrefab.rotation, GameObject.Find("Towers").transform);
+			Instantiate(towerPrefab, towerPrefab.position, towerPrefab.rotation, transform);
 		} else if(Input.GetButtonDown("Fire1") && Physics.OverlapSphere(towerPrefab.position, radiusBetween, 1 << LayerMask.NameToLayer("Ignore Raycast")).Length > 1) {
 			print("TOO CLOSE TO ANOTHER TOWER");
 		}

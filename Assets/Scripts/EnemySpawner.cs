@@ -20,9 +20,11 @@ public class EnemySpawner : MonoBehaviour {
 			print("-- WAVE FINISHED --");
 			CancelInvoke("SpawnEnemy");
 		} else if(waveLimit == 0) {
-			Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation, GameObject.Find("Enemies").transform);
+			//if wavelimit is set to 0, keep spawning enemies. For testing purposes.
+			Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation, transform);
 		} else {
-			Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation, GameObject.Find("Enemies").transform);
+			//keep spawning until enemycount reaches wavelimit
+			Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation, transform);
 			enemyCount++;
 		}
 	}
